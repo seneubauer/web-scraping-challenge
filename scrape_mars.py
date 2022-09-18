@@ -102,7 +102,7 @@ def scrape():
         hemisphere_image_urls.append({"title": img_title, "img_url": img_link})
 
     # close the browser
-    browser.close()
+    browser.quit()
     
     return {"source": "nasa_mars_news", "data": {"title": news_title, "paragraph": news_paragraph},
             "source": "jpl_mars_space_images", "data": featured_image_url,
