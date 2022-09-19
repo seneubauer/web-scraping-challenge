@@ -104,7 +104,7 @@ def scrape():
     # close the browser
     browser.quit()
     
-    return [{"source": "nasa_mars_news", "data": {"title": news_title, "paragraph": news_paragraph}},
-            {"source": "jpl_mars_space_images", "data": featured_image_url},
-            {"source": "mars_facts", "data": table_html},
-            {"source": "mars_hemispheres", "data": hemisphere_image_urls}]
+    return {"nasa_mars_news": {"title": news_title, "paragraph": news_paragraph},
+            "jpl_mars_space_images": featured_image_url,
+            "mars_facts": table_html,
+            "mars_hemispheres": hemisphere_image_urls}
