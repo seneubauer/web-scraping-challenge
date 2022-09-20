@@ -34,7 +34,7 @@ def scrape():
     scraped_data = scrape_mars.scrape()
     
     # update the data
-    collection.insert_many(scraped_data)
+    collection.update_one({}, {"$set": scraped_data}, upsert = True)
     
     # return the success message to our page
     return redirect("/", code = 302)
