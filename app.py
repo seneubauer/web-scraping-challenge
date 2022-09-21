@@ -20,15 +20,21 @@ collection = db.planet_data
 @app.route("/")
 def index():
     
+    # acquire scraped data
+    scraped_data = scrape_mars.scrape()
+    
+    # update the data
+    collection.update_one({}, {"$set": scraped_data}, upsert = True)
+    
     # retrieve data from the database
-    data = collection.find()
+    data = collection.find_one()
     
     # pass the information to render_template
     return render_template("index.html", mars_data = data)
 
 # command to reacquire data
 @app.route("/scrape")
-def scrape():
+def scraper():
     
     # acquire scraped data
     scraped_data = scrape_mars.scrape()
