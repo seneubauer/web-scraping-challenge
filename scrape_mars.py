@@ -58,8 +58,11 @@ def scrape():
     table_df = table_dfs[0]
 
     # convert the DataFrame into HTML
-    table_html = table_df.to_html()
+    table_html = table_df.to_html(header = False, index = False)
 
+    # replace the default 'dataframe' class with the Boostrap class
+    table_html = table_html.replace("dataframe", "table table-striped table-hover")
+    
     # WEB SCRAPING - Mars Hemispheres
 
     # specify the initial browser URL
@@ -96,7 +99,7 @@ def scrape():
         soup = bs(browser.html, "html.parser")
         
         # extract the image link
-        img_link = f'{web_url}/{soup.body.find("div", class_ = "downloads").find("ul").find_all("li")[1].find("a")["href"]}'
+        img_link = f'{web_url}/{soup.body.find("img", class_ = "wide-image")["src"]}'
         
         # append the information to the list
         hemisphere_image_urls.append({"title": img_title, "img_url": img_link})

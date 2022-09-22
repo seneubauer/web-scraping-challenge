@@ -44,6 +44,23 @@
                 <p>{{mars_data.nasa_mars_news.paragraph}}</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-8">
+                <p class="h3">Featured Mars Image</p>
+                <img src="{{ mars_data.jpl_mars_space_images }}" class="rounded mx-auto d-block" alt="Featured Mars Image">
+            </div>
+            <div class="col-md-4">{{ mars_data.mars_facts | safe }}</div>
+        </div>
+        <div class="row">
+            {% for item in mars_data.mars_hemispheres %}
+            <div class="col-md-3">
+                <figure class="figure my-4">
+                    <img src="{{ item.img_url }}" class="figure-img img-fluid rounded" alt="{{ item.title }}">
+                    <figcaption class="figure-caption text-end">{{ item.title }}</figcaption>
+                </figure>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 
     <!-- import the boostrap js scripts -->
