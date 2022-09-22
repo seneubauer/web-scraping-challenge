@@ -20,14 +20,18 @@ collection = db.planet_data
 @app.route("/")
 def index():
     
-    # acquire scraped data
-    scraped_data = scrape_mars.scrape()
-    
-    # update the data
-    collection.update_one({}, {"$set": scraped_data}, upsert = True)
-    
     # retrieve data from the database
     data = collection.find_one()
+    
+    # check if the returned data is null
+    if data is None:
+        data = {"nasa_mars_news": {"title": "news_title", "paragraph": "news_paragraph"},
+                "jpl_mars_space_images": "https://picsum.photos/400/400",
+                "mars_facts": "<p>table_html</p>",
+                "mars_hemispheres": [{"title": "img_title0", "img_url": "https://picsum.photos/400/400"},
+                                     {"title": "img_title1", "img_url": "https://picsum.photos/400/400"},
+                                     {"title": "img_title2", "img_url": "https://picsum.photos/400/400"},
+                                     {"title": "img_title3", "img_url": "https://picsum.photos/400/400"}]}
     
     # pass the information to render_template
     return render_template("index.html", mars_data = data)
